@@ -1,0 +1,216 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Shopping Cart";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - HMH Mart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --hmh-teal: #008080;
+            --hmh-light: #f8f9fa;
+        }
+
+        footer {
+            position: bottom;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .hmh-bg-teal {
+            background-color: var(--hmh-teal);
+        }
+
+        .hmh-text-teal {
+            color: var(--hmh-teal);
+        }
+
+        .card-hover {
+            transition: all 0.3s;
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 128, 128, 0.05);
+        }
+
+        .cart-item-img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .btn-hmh {
+            background-color: var(--hmh-teal);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+            .btn-hmh:hover {
+                background-color: #006666;
+                color: white;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark hmh-bg-teal py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="bi bi-box-seam me-2"></i>HMH Mart
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/catalogue">Continue Shopping</a>
+                    </li>
+                </ul>
+                <div class="ms-lg-3 mt-3 mt-lg-0">
+                    <span class="text-white me-3">Total: $42.50</span>
+                    <a href="/checkout" class="btn btn-light">
+                        <i class="bi bi-credit-card me-1"></i> Checkout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card card-hover mb-4">
+                    <div class="card-body">
+                        <h4 class="fw-bold hmh-text-teal mb-4">
+                            <i class="bi bi-cart3 me-2"></i>Your Cart (3 items)
+                        </h4>
+
+                        <div class="d-flex gap-4 mb-4 p-3 border-bottom">
+                            <img src="/images/olive-oil.jpg" class="cart-item-img" alt="Product">
+                            <div class="flex-grow-1">
+                                <h5 class="fw-bold">Premium Olive Oil</h5>
+                                <p class="text-muted">Extra virgin cold-pressed</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="quantity-control">
+                                        <button class="btn btn-outline-secondary quantity-btn">
+                                            <i class="bi bi-dash"></i>
+                                        </button>
+                                        <span class="fw-bold">2</span>
+                                        <button class="btn btn-outline-secondary quantity-btn">
+                                            <i class="bi bi-plus"></i>
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <span class="fw-bold hmh-text-teal">$8.99</span>
+                                        <small class="text-muted d-block">$17.98 total</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-link text-danger">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card card-hover sticky-top">
+                    <div class="card-body">
+                        <h5 class="fw-bold hmh-text-teal mb-4">Order Summary</h5>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Subtotal (3 items)</span>
+                            <span class="fw-bold">$42.50</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-4">
+                            <span>Shipping</span>
+                            <span class="fw-bold">Free</span>
+                        </div>
+                        <div class="d-flex justify-content-between fw-bold fs-5 mb-4">
+                            <span>Total</span>
+                            <span class="hmh-text-teal">$42.50</span>
+                        </div>
+                        <button class="btn btn-hmh w-100">
+                            <i class="bi bi-credit-card me-1"></i> Proceed to Checkout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="hmh-bg-teal text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="fw-bold mb-3">
+                        <i class="bi bi-basket-fill me-2"></i>HMH Mart
+                    </h5>
+                    <p>Quality products for your everyday needs</p>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="fw-bold mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Shop</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-white">
+            <div class="text-center">
+                <p class="mb-0">© 2024 HMH Mart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.quantity-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const input = this.parentElement.querySelector('span');
+                    let quantity = parseInt(input.textContent);
+
+                    if(this.querySelector('.bi-dash')) {
+                        quantity = Math.max(1, quantity - 1);
+                    } else {
+                        quantity += 1;
+                    }
+
+                    input.textContent = quantity;
+                    updateTotals();
+                });
+            });
+
+            function updateTotals() {
+            }
+        });
+    </script>
+</body>
+</html>

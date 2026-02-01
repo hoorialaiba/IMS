@@ -1,0 +1,223 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Alerts";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - HMH Mart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --hmh-teal: #008080;
+            --hmh-light: #f8f9fa;
+            --hmh-warning: #ffc107;
+            --hmh-danger: #dc3545;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .hmh-bg-teal {
+            background-color: var(--hmh-teal);
+        }
+
+        .hmh-text-teal {
+            color: var(--hmh-teal);
+        }
+
+        .hmh-bg-warning {
+            background-color: var(--hmh-warning);
+        }
+
+        .hmh-bg-danger {
+            background-color: var(--hmh-danger);
+        }
+
+        .alert-card {
+            transition: all 0.3s;
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 128, 128, 0.05);
+            margin-bottom: 1rem;
+        }
+
+            .alert-card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 6px 20px rgba(0, 128, 128, 0.1);
+            }
+
+        .alert-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .btn-hmh {
+            background-color: var(--hmh-teal);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+            .btn-hmh:hover {
+                background-color: #006666;
+                color: white;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+        .content-wrapper {
+            flex: 1;
+            padding-bottom: 60px;
+        }
+
+        footer {
+            background-color: var(--hmh-teal);
+            color: white;
+            padding: 2rem;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark hmh-bg-teal py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="bi bi-basket-fill me-2"></i>HMH Mart
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard"><i class="bi bi-speedometer2 me-1"></i>Dashboard</a>
+                    </li>
+                </ul>
+                <div class="ms-lg-3 mt-3 mt-lg-0">
+                    <a href="/profile" class="btn btn-light">
+                        <i class="bi bi-bell-fill me-1"></i> Alerts
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Alerts Content -->
+    <div class="content-wrapper">
+        <div class="container py-5">
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h2 class="fw-bold hmh-text-teal mb-4">
+                        <i class="bi bi-bell-fill me-2"></i>Your Alerts
+                    </h2>
+                </div>
+            </div>
+
+            <!-- Alert Card - Order Update -->
+            <div class="alert-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-start gap-4">
+                        <div class="alert-icon hmh-bg-teal text-white">
+                            <i class="bi bi-truck"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h5 class="fw-bold mb-1">Order Shipped</h5>
+                            <p class="text-muted mb-2">Your order #ORD-1052 has been shipped via Standard Delivery</p>
+                            <small class="text-muted">Updated 2 hours ago</small>
+                        </div>
+                        <button class="btn btn-hmh">Track Order</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alert Card - Low Stock -->
+            <div class="alert-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-start gap-4">
+                        <div class="alert-icon hmh-bg-danger text-white">
+                            <i class="bi bi-exclamation-triangle"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h5 class="fw-bold mb-1">Low Stock Alert</h5>
+                            <p class="text-muted mb-2">Olive Oil inventory is low (5 remaining)</p>
+                            <small class="text-muted">Alert created 1 day ago</small>
+                        </div>
+                        <button class="btn btn-hmh">Manage Stock</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alert Card - System Update -->
+            <div class="alert-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-start gap-4">
+                        <div class="alert-icon hmh-bg-warning text-dark">
+                            <i class="bi bi-info-circle"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h5 class="fw-bold mb-1">System Maintenance</h5>
+                            <p class="text-muted mb-2">Scheduled maintenance on June 30th, 2:00-4:00 AM</p>
+                            <small class="text-muted">Posted 3 days ago</small>
+                        </div>
+                        <button class="btn btn-hmh">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="hmh-bg-teal text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="fw-bold mb-3">
+                        <i class="bi bi-box-seam me-2"></i>HMH Mart
+                    </h5>
+                    <p>Quality products for your everyday needs</p>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="fw-bold mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Support</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Alerts</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-white">
+            <div class="text-center">
+                <p class="mb-0">© 2024 HMH Mart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add alert interaction logic here
+            document.querySelectorAll('.alert-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if(!e.target.closest('button')) {
+                        this.classList.toggle('alert-read');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
