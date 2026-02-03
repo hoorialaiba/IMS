@@ -1,0 +1,171 @@
+﻿@page
+@model LoginModel
+@{
+    Layout = null;
+    ViewData["Title"] = "Login Page";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - HMH Mart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <style>
+        .hero-section {
+            background: linear-gradient(rgba(0, 128, 128, 0.8), rgba(0, 128, 128, 0.8)), url('/images/img2.jpeg');
+            background-size: cover;
+            background-position: center;
+            min-height: 70vh;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--hmh-teal);
+        }
+
+        .card-hover {
+            transition: all 0.3s;
+        }
+
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .hmh-bg-teal {
+            background-color: var(--hmh-teal);
+        }
+
+        .hmh-text-teal {
+            color: var(--hmh-teal);
+        }
+        :root {
+            --hmh-teal: #008080;
+            --hmh-light: #f8f9fa;
+        }
+
+        .hmh-text-teal {
+            color: var(--hmh-teal);
+        }
+        .btn-hmh {
+            background-color: var(--hmh-teal);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+            .btn-hmh:hover {
+                background-color: #006666;
+                color: white;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+        .btn-hmh-outline {
+            border: 2px solid var(--hmh-teal);
+            color: var(--hmh-teal);
+            background: transparent;
+        }
+
+            .btn-hmh-outline:hover {
+                background-color: var(--hmh-teal);
+                color: white;
+            }
+
+        .nav-pills .nav-link.active {
+            background-color: var(--hmh-teal);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark hmh-bg-teal py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold">
+                <i class="bi bi-basket-fill me-2"></i>HMH Mart
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                </ul>
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section d-flex align-items-center text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <h1 class="display-3 fw-bold mb-4">Inventory Management Made Simple</h1>
+                    <p class="lead mb-5">Track stock, manage orders, and get real-time alerts with HMH Mart's powerful inventory system.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="/Authentication/Signup" class="btn btn-hmh btn-lg">
+                            <i class="bi bi-person-plus me-2"></i>Get Started
+                        </a>
+                        <a href="#features" class="btn btn-hmh-outline btn-lg text-white border-white">
+                            <i class="bi bi-play-circle me-2"></i>Learn More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<div class="modal fade show d-block" id="loginModal" tabindex="-1" aria-hidden="true" style="background: rgba(0,0,0,0.5);">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 350px;">
+        <div class="modal-content" style="min-height: 400px;">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title w-100 text-center fs-4">
+                    <i class="bi bi-box-arrow-in-right me-2 hmh-text-teal"></i>HMH Mart Login
+                </h5>
+                <a href="/" class="btn-close" aria-label="Close"></a>
+            </div>
+
+            <div class="modal-body d-flex flex-column justify-content-center px-4">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                    <div class="mb-4">
+                        <label asp-for="Input.Email" class="form-label fw-semibold">Email Address</label>
+                        <input asp-for="Input.Email" class="form-control py-2" placeholder="Enter your email" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Input.Password" class="form-label fw-semibold">Password</label>
+                        <input asp-for="Input.Password" class="form-control py-2" placeholder="Enter password" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-hmh w-100 py-2 fs-5">Login</button>
+                </form>
+
+                <div class="text-center mt-4 pt-3">
+                    <p class="text-muted">
+                        New to HMH Mart?
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="hmh-text-teal fw-semibold">Create account</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
