@@ -1,0 +1,284 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Home page";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - HMH Mart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --hmh-teal: #008080;
+            --hmh-light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .hmh-bg-teal {
+            background-color: var(--hmh-teal);
+        }
+
+        .hmh-text-teal {
+            color: var(--hmh-teal);
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0, 128, 128, 0.8), rgba(0, 128, 128, 0.8)), url('/images/img2.jpeg');
+            background-size: cover;
+            background-position: center;
+            min-height: 70vh;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--hmh-teal);
+        }
+
+        .btn-hmh {
+            background-color: var(--hmh-teal);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+            .btn-hmh:hover {
+                background-color: #006666;
+                color: white;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+        .btn-hmh-outline {
+            border: 2px solid var(--hmh-teal);
+            color: var(--hmh-teal);
+            background: transparent;
+        }
+
+            .btn-hmh-outline:hover {
+                background-color: var(--hmh-teal);
+                color: white;
+            }
+
+        .nav-pills .nav-link.active {
+            background-color: var(--hmh-teal);
+        }
+
+        .card-hover {
+            transition: all 0.3s;
+        }
+
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark hmh-bg-teal py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold">
+                <i class="bi bi-basket-fill me-2"></i>HMH Mart
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                </ul>
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section d-flex align-items-center text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <h1 class="display-3 fw-bold mb-4">Inventory Management Made Simple</h1>
+                    <p class="lead mb-5">Track stock, manage orders, and get real-time alerts with HMH Mart's powerful inventory system.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#registering" class="btn btn-hmh btn-lg">
+                            <i class="bi bi-person-plus me-2"></i>Get Started
+                        </a>
+                        <a href="#features" class="btn btn-hmh-outline btn-lg text-white border-white">
+                            <i class="bi bi-play-circle me-2"></i>Learn More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-5 bg-light">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold hmh-text-teal">Powerful Features</h2>
+                <p class="lead">Everything you need to manage your inventory efficiently</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm card-hover">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-box-seam"></i>
+                            </div>
+                            <h4 class="fw-bold">Product Tracking</h4>
+                            <p>Real-time visibility of all your inventory items across multiple locations.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm card-hover">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-bell"></i>
+                            </div>
+                            <h4 class="fw-bold">Low-Stock Alerts</h4>
+                            <p>Automated notifications when inventory levels drop below threshold.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm card-hover">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon">
+                                <i class="bi bi-graph-up"></i>
+                            </div>
+                            <h4 class="fw-bold">Dashboard Analytics</h4>
+                            <p>Beautiful charts and reports to understand your inventory trends.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div id = "registering" class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <img src="\images\img2.jpeg"
+                         alt="Inventory Management" class="img-fluid rounded shadow">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="fw-bold hmh-text-teal mb-4">Get Started Today</h2>
+                    <p class="lead mb-4">Choose your role to begin your inventory management journey with HMH Mart.</p>
+
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-body p-4">
+                            <h4 class="fw-bold">
+                                <i class="bi bi-shield-lock me-2 hmh-text-teal"></i>Admin Access
+                            </h4>
+                            <p class="mb-3">Full control over inventory, products, and user management.</p>
+                            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-hmh">
+                                Register as Admin
+                            </a>
+                            <small class="d-block mt-2 text-muted">* Requires admin access code</small>
+                        </div>
+                    </div>
+
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <h4 class="fw-bold">
+                                <i class="bi bi-person me-2 hmh-text-teal"></i>User Access
+                            </h4>
+                            <p class="mb-3">Browse products, place orders, and track inventory levels.</p>
+                            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-hmh-outline">
+                                Register as User
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="hmh-bg-teal text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="fw-bold mb-3">
+                        <i class="bi bi-box-seam me-2"></i>HMH Mart
+                    </h5>
+                    <p>Streamlining inventory management for businesses of all sizes.</p>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="fw-bold mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="#features" class="text-white text-decoration-none">Features</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Pricing</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4 mb-4 mb-md-0">
+                    <h5 class="fw-bold mb-3">Legal</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Privacy Policy</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Terms of Service</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="fw-bold mb-3">Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="bi bi-envelope me-2"></i> support@hmhmart.com
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-telephone me-2"></i> +1 (555) 123-4567
+                        </li>
+                        <li>
+                            <i class="bi bi-geo-alt me-2"></i> 123 Business St, City
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-white">
+            <div class="text-center">
+                <p class="mb-0">© 2024 HMH Mart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const featureCards = document.querySelectorAll('.card-hover');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            featureCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.5s ease-out';
+                observer.observe(card);
+            });
+        });
+    </script>
+
+</body>
+</html>

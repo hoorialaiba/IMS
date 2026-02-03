@@ -1,0 +1,169 @@
+﻿@model IMSIdentity.Models.Product
+@{
+    Layout = null;
+    ViewData["Title"] = "Edit Product";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"] - HMH Mart</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .app-header {
+            background-color: teal;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            flex-shrink: 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .btn-teal {
+            background-color: teal;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+            .btn-teal:hover {
+                background-color: #006666;
+                color: white;
+            }
+
+        .btn-danger {
+            background-color: #dc3545;
+        }
+
+        .app-footer {
+            background-color: teal;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            flex-shrink: 0;
+        }
+
+        .required:after {
+            content: " *";
+            color: red;
+        }
+
+        .image-preview {
+            max-width: 200px;
+            max-height: 200px;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="app-header">
+        <h1>HMH Mart - Edit Product</h1>
+    </header>
+
+    <main class="main-content">
+        <form asp-controller="Admin" asp-action="ConfirmEdit" method="post" id="editForm" class="product-card">
+            <h2 class="mb-4">Edit Product</h2>
+            <form>
+                <input type="hidden" id="productId">
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="name" class="form-label required">Product Name</label>
+                        <input type="text" class="form-control" required name="name" value="@Model.Name" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="brand" class="form-label required">Brand name</label>
+                        <input type="text" class="form-control" name="brand" value=@Model.Brand required>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="quantity" class="form-label required">Quantity</label>
+                        <input type="number" class="form-control" name="quantity" min="1" value=@Model.Quantity required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="price" class="form-label required">Price ($)</label>
+                        <input type="number" class="form-control" name="price" min="0" step="0.01" value=@Model.Price required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="type" class="form-label required">Product Type</label>
+                        <select class="form-select" name="type" required>
+                            <option value="">Select type</option>
+                            <option value="Food" selected>Food</option>
+                            <option value="Beverage">Beverage</option>
+                            <option value="Snack">Snack</option>
+                            <option value="Household">Household</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="expiry" class="form-label required">Expiry Date</label>
+                        <input type="date" class="form-control" name="expiry" value=@Model.Expiry required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="barcode" class="form-label required">Barcode/ISBN</label>
+                        <input type="text" class="form-control" name="barcode" value=@Model.Barcode readonly>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label required">Description</label>
+                    <textarea class="form-control" name="description" rows="3" required>@Model.Description</textarea>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <div class="d-flex gap-2">
+                        @* <button type="button" class="btn btn-outline-secondary">Cancel</button> *@
+                        <button type="submit" class="btn btn-teal">Save Changes</button>
+                    </div>
+                </div>
+            </form>
+        </form>
+    </main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('expiry').min = new Date().toISOString().split('T')[0];
+    </script>
+</body>
+</html>

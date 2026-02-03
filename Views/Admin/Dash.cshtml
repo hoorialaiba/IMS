@@ -1,0 +1,460 @@
+﻿@model List<IMSIdentity.Models.Product>
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Admin Dashboard";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - HMH Mart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --hmh-teal: #008080;
+            --hmh-light: #f8f9fa;
+            --hmh-danger: #dc3545;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            height: 100vh;
+            background-color: white;
+            border-right: 1px solid #eee;
+            position: fixed;
+            width: 280px;
+            z-index: 1000;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            padding: 2rem;
+            background-color: var(--hmh-light);
+            width: calc(100% - 280px);
+            box-sizing: border-box;
+            transition: margin 0.3s ease-in-out;
+        }
+
+        .card-hover {
+            transition: all 0.3s;
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 128, 128, 0.05);
+            margin-bottom: 1rem;
+            max-width: 100%;
+        }
+
+            .card-hover:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 6px 20px rgba(0, 128, 128, 0.1);
+            }
+
+        .active-menu {
+            background-color: rgba(0, 128, 128, 0.1) !important;
+            color: var(--hmh-teal) !important;
+            border-left: 3px solid var(--hmh-teal) !important;
+        }
+
+        .nav-link {
+            padding: 0.75rem 1.5rem;
+            color: #666;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .hmh-text-teal {
+            color: var(--hmh-teal);
+        }
+
+        .btn-hmh {
+            background-color: var(--hmh-teal);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+            .btn-hmh:hover {
+                background-color: #006666;
+                color: white;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+        .table-responsive {
+            overflow-x: auto;
+            max-width: 98%;
+            margin: 0 auto;
+        }
+
+        .row.mb-4 {
+            margin-left: -0.5rem;
+            margin-right: -0.5rem;
+        }
+
+        @@media (max-width: 992px) {
+            .sidebar
+
+        {
+            transform: translateX(-100%);
+            width: 280px;
+        }
+
+        .sidebar.mobile-visible {
+            transform: translateX(0);
+        }
+
+        .main-content {
+            margin-left: 0;
+            width: 100%;
+            padding: 1.5rem;
+        }
+
+        .row.mb-4 > .col-md-3 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        }
+
+        @@media (max-width: 768px) {
+            .card-header .d-flex
+
+        {
+            flex-direction: column;
+            align-items: flex-start !important;
+            gap: 1rem;
+        }
+
+        .btn-hmh {
+            width: 100%;
+            text-align: center;
+        }
+
+        .navbar-brand {
+            font-size: 1.1rem;
+        }
+
+        }
+
+        @@media (max-width: 576px) {
+            .table td, .table th
+
+        {
+            white-space: nowrap;
+            min-width: 120px;
+            font-size: 0.9rem;
+        }
+
+        .nav-link {
+            padding: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .dropdown-menu {
+            min-width: 200px;
+        }
+
+        .main-content {
+            padding: 1rem;
+        }
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="sidebar p-3">
+                <div class="mb-4">
+                    <h4 class="fw-semibold hmh-text-teal">
+                        <i class="bi bi-basket-fill me-2"></i>HMH Mart
+                    </h4>
+                </div>
+                <nav class="nav flex-column">
+                    <a class="nav-link active-menu" href="#">
+                        <i class="bi bi-speedometer2 me-2"></i>Dashboard
+                    </a>
+                    <a class="nav-link" href="/Admin/Product">
+                        <i class="bi bi-box-seam me-2"></i>Products
+                    </a>
+                    <a class="nav-link" href="/Admin/Order">
+                        <i class="bi bi-cart-check me-2"></i>Orders
+                    </a>
+                    <a class="nav-link" href="/Alerts.html">
+                        <i class="bi bi-exclamation-triangle me-2"></i>Alerts
+                    </a>
+                </nav>
+            </div>
+
+            <div class="main-content">
+                <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
+                    <div class="container-fluid">
+                        <a class="navbar-brand fw-bold hmh-text-teal" href="#">
+                            <i class="bi bi-basket-fill me-2"></i>HMH Mart
+                        </a>
+                        <div class="d-flex align-items-center ms-auto">
+                            <div class="dropdown">
+                                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown">
+                                    <i class="bi bi-person-circle me-1 hmh-text-teal"></i> Admin User
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+
+                                    <li class="dropdown-item">
+                                        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })"> 
+                                            <button type="submit" class="nav-link btn btn-link ">Logout</button>
+                                        </form>
+                                    </li>
+
+                                    @* <li><a class="dropdown-item" href="#">Sign out</a></li>  *@
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <div class="container-fluid p-0">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4 mb-4">
+                        <div class="col">
+                            <div class="card card-hover">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h6 class="text-muted">Total Products</h6>
+                                            <h3 class="hmh-text-teal">142</h3>
+                                        </div>
+                                        <div class="bg-teal bg-opacity-10 p-3 rounded">
+                                            <i class="bi bi-box-seam hmh-text-teal fs-4"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card card-hover">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h6 class="text-muted">Low Stock</h6>
+                                            <h3 class="hmh-text-teal">8</h3>
+                                        </div>
+                                        <div class="bg-danger bg-opacity-10 p-3 rounded">
+                                            <i class="bi bi-exclamation-triangle text-danger fs-4"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card card-hover">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h6 class="text-muted">Pending Orders</h6>
+                                            <h3 class="hmh-text-teal">24</h3>
+                                        </div>
+                                        <div class="bg-warning bg-opacity-10 p-3 rounded">
+                                            <i class="bi bi-cart text-warning fs-4"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card card-hover">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h6 class="text-muted">Revenue</h6>
+                                            <h3 class="hmh-text-teal">$3,845</h3>
+                                        </div>
+                                        <div class="bg-success bg-opacity-10 p-3 rounded">
+                                            <i class="bi bi-currency-dollar text-success fs-4"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card card-hover mb-4">
+                        <div class="card-header bg-white border-0">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                <h5 class="mb-0 hmh-text-teal">
+                                    <i class="bi bi-box-seam me-2"></i>Product Management
+                                </h5>
+                                <a class="btn btn-hmh mt-2 mt-md-0" href="/Admin/Add">
+                                    <i class="bi bi-plus-lg me-1"></i>Add Product
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Brand</th>
+                                            <th>Category</th>
+                                            <th>Stock</th>
+                                            <th>Price</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null && Model.Any())
+                                        {
+                                            int n = 0;
+                                            @foreach (var product in Model)
+                                            {
+                                                <tr>
+                                                    <td>@product.Name</td>
+                                                    <td>@product.Brand</td>
+                                                    <td>@product.Type</td>
+                                                    <td>
+                                                        <span class="badge bg-success">@product.Quantity</span>
+                                                    </td>
+                                                    <td>@product.Price</td>
+                                                    <td>
+                                                        <a asp-controller="Admin" asp-action="Edit" asp-route-barcode="@product.Barcode" class="btn btn-sm btn-outline-primary me-1">
+                                                            <i class="bi bi-pencil"></i>
+                                                        </a>
+                                                        <a asp-controller="Admin" asp-action="Delete" asp-route-barcode="@product.Barcode" class="btn btn-sm btn-outline-danger">
+                                                            <i class="bi bi-trash"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                n++;
+                                                if (n >= 3)
+                                                {
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td colspan="6" class="text-center text-muted py-4">
+                                                    No products found
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card card-hover mb-4">
+                        <div class="card-header bg-white border-0">
+                            <h5 class="mb-0 hmh-text-teal">
+                                <i class="bi bi-exclamation-triangle me-2"></i>Low Stock Alerts
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-low-stock d-flex align-items-center mb-3">
+                                <i class="bi bi-exclamation-triangle-fill text-danger me-3 fs-4"></i>
+                                <div>
+                                    <strong>Olive Oil</strong> is running low (5 remaining)
+                                    <div class="text-muted small">Reorder threshold: 10 units</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card card-hover">
+                        <div class="card-header bg-white border-0">
+                            <h5 class="mb-0 hmh-text-teal">
+                                <i class="bi bi-cart-check me-2"></i>Recent Orders
+                            </h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Order ID</th>
+                                            <th>Customer</th>
+                                            <th>Date</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>ORD-1052</td>
+                                            <td>John Smith</td>
+                                            <td>2023-06-15</td>
+                                            <td>$84.50</td>
+                                            <td>
+                                                <span class="badge bg-warning text-dark">Pending</span>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-sm btn-outline-primary" href="/Home/Order">
+                                                    <i class="bi bi-eye"></i> View
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const sidebar = document.querySelector('.sidebar');
+            const menuToggle = document.createElement('button');
+            menuToggle.className = 'btn btn-hmh d-lg-none position-fixed';
+            menuToggle.style.bottom = '20px';
+            menuToggle.style.right = '20px';
+            menuToggle.style.zIndex = '1000';
+            menuToggle.innerHTML = '<i class="bi bi-list"></i> Menu';
+
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('mobile-visible');
+            });
+
+            document.body.appendChild(menuToggle);
+
+            // Tooltip initialization
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+
+            // Active menu highlighting
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if(link.href === window.location.href) {
+                    link.classList.add('active-menu');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
