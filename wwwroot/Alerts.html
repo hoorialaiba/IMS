@@ -1,0 +1,289 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerts - HMH Mart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.min.js"></script>
+    <style>
+        :root {
+            --hmh-teal: #008080;
+            --hmh-light: #f8f9fa;
+            --hmh-warning: #ffc107;
+            --hmh-danger: #dc3545;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .hmh-bg-teal {
+            background-color: var(--hmh-teal);
+        }
+
+        .hmh-text-teal {
+            color: var(--hmh-teal);
+        }
+
+        .hmh-bg-warning {
+            background-color: var(--hmh-warning);
+        }
+
+        .hmh-bg-danger {
+            background-color: var(--hmh-danger);
+        }
+
+        .alert-card {
+            transition: all 0.3s;
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 128, 128, 0.05);
+            margin-bottom: 1rem;
+        }
+
+            .alert-card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 6px 20px rgba(0, 128, 128, 0.1);
+            }
+
+        .alert-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .btn-hmh {
+            background-color: var(--hmh-teal);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+            .btn-hmh:hover {
+                background-color: #006666;
+                color: white;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+        .content-wrapper {
+            flex: 1;
+            padding-bottom: 60px;
+        }
+
+        footer {
+            background-color: var(--hmh-teal);
+            color: white;
+            padding: 2rem;
+            margin-top: auto;
+        }
+
+        .alert-read {
+            opacity: 0.6;
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark hmh-bg-teal py-3">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="bi bi-basket-fill me-2"></i>HMH Mart
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard"><i class="bi bi-speedometer2 me-1"></i>Dashboard</a>
+                    </li>
+                </ul>
+                <div class="ms-lg-3 mt-3 mt-lg-0">
+                    <a href="/profile" class="btn btn-light">
+                        <i class="bi bi-bell-fill me-1"></i> Alerts
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content-wrapper">
+        <div class="container py-5">
+            <div class="row mb-4">
+                <div class="col-12 d-flex justify-content-between align-items-center">
+                    <h2 class="fw-bold hmh-text-teal mb-0">
+                        <i class="bi bi-bell-fill me-2"></i>Your Alerts
+                    </h2>
+                    <div class="btn-group">
+                        <button class="btn btn-outline-secondary" id="markAllRead">
+                            <i class="bi bi-check-all me-1"></i>Mark All Read
+                        </button>
+                        <button class="btn btn-outline-danger" id="clearAll">
+                            <i class="bi bi-trash me-1"></i>Clear All
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="alertsContainer">
+                <div class="alert-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start gap-4">
+                            <div class="alert-icon hmh-bg-teal text-white">
+                                <i class="bi bi-truck"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h5 class="fw-bold mb-1">Order Shipped</h5>
+                                <p class="text-muted mb-2">Your order #ORD-1052 has been shipped via Standard Delivery</p>
+                                <small class="text-muted">Updated 2 hours ago</small>
+                            </div>
+                            <button class="btn btn-hmh">Track Order</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start gap-4">
+                            <div class="alert-icon hmh-bg-danger text-white">
+                                <i class="bi bi-exclamation-triangle"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h5 class="fw-bold mb-1">Low Stock Alert</h5>
+                                <p class="text-muted mb-2">Olive Oil inventory is low (5 remaining)</p>
+                                <small class="text-muted">Alert created 1 day ago</small>
+                            </div>
+                            <button class="btn btn-hmh">Manage Stock</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="hmh-bg-teal text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="fw-bold mb-3">
+                        <i class="bi bi-box-seam me-2"></i>HMH Mart
+                    </h5>
+                    <p>Quality products for your everyday needs</p>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="fw-bold mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Support</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Alerts</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-white">
+            <div class="text-center">
+                <p class="mb-0">© 2024 HMH Mart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Load stored alerts from server but not currently working
+        fetch('/Alert/GetAll')
+            .then(res => res.json())
+            .then(data => {
+                data.forEach(alert => {
+                    const alertHTML = `
+                    <div class="alert-card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-start gap-4">
+                                <div class="alert-icon hmh-bg-teal text-white">
+                                    <i class="bi ${alert.iconClass}"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h5 class="fw-bold mb-1">${alert.title}</h5>
+                                    <p class="text-muted mb-2">${alert.message}</p>
+                                    <small class="text-muted">${new Date(alert.createdAt).toLocaleString()}</small>
+                                </div>
+                                <button class="btn btn-hmh">View</button>
+                            </div>
+                        </div>
+                    </div>`;
+                    document.getElementById("alertsContainer").insertAdjacentHTML("beforeend", alertHTML);
+                });
+            });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const connection = new signalR.HubConnectionBuilder()
+                .withUrl("/alertHub")
+                .configureLogging(signalR.LogLevel.Information)
+                .build();
+
+            async function start() {
+                try {
+                    await connection.start();
+                    console.log("SignalR Connected");
+                } catch (err) {
+                    console.error(err);
+                    setTimeout(start, 5000);
+                }
+            }
+            connection.on("ReceiveAlert", function (title, message, iconClass) {
+                const alertHTML = `
+            <div class="alert-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-start gap-4">
+                        <div class="alert-icon hmh-bg-teal text-white">
+                            <i class="bi ${iconClass}"></i>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h5 class="fw-bold mb-1">${title}</h5>
+                            <p class="text-muted mb-2">${message}</p>
+                            <small class="text-muted">Just now</small>
+                        </div>
+                        <button class="btn btn-hmh">View</button>
+                    </div>
+                </div>
+            </div>`;
+
+                document.getElementById("alertsContainer").insertAdjacentHTML("afterbegin", alertHTML);
+            });
+
+
+            connection.onclose(async () => {
+                await start();
+            });
+
+            document.getElementById('alertsContainer').addEventListener('click', function (e) {
+                const alertCard = e.target.closest('.alert-card');
+                if (alertCard && !e.target.closest('button')) {
+                    alertCard.classList.toggle('alert-read');
+                }
+            });
+
+            document.getElementById('markAllRead').addEventListener('click', () => {
+                document.querySelectorAll('.alert-card').forEach(card => {
+                    card.classList.add('alert-read');
+                });
+            });
+
+            document.getElementById('clearAll').addEventListener('click', () => {
+                document.getElementById('alertsContainer').innerHTML = '';
+            });
+
+            start();
+        });
+    </script>
+</body>
+</html>
