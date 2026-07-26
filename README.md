@@ -4,7 +4,6 @@
 ![ASP.NET Core](https://img.shields.io/badge/ASP.NET-Core-purple)
 ![Entity Framework](https://img.shields.io/badge/Entity%20Framework-Core-green)
 ![SignalR](https://img.shields.io/badge/SignalR-Real--Time-orange)
-![Docker](https://img.shields.io/badge/Docker-Supported-2496ED?logo=docker&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
 
 An **ASP.NET Core MVC** web application developed to efficiently manage products, inventory, and customer orders. The system incorporates **ASP.NET Core Identity** for authentication, **Role-Based Authorization** for secure access control, **Entity Framework Core** for database operations, **SignalR** for real-time notifications, and follows the **Repository Pattern** to ensure a modular, maintainable, and scalable architecture.
@@ -188,33 +187,6 @@ git clone https://github.com/hoorialaiba/IMS.git
 ```powershell
 Update-Database
 ```
-
-5. Build and run the application.
-
----
-
-### Option 2 – Run Using Docker
-
-Pull the application image:
-
-```bash
-docker pull 92514577868/imsidentity
-```
-
-Pull the SQL Server image:
-
-```bash
-docker pull 92514577868/mssql-server
-```
-
-Run the containers according to your Docker configuration.
-
-Docker Hub Images:
-
-- **Application:** https://hub.docker.com/r/92514577868/imsidentity
-- **SQL Server:** https://hub.docker.com/r/92514577868/mssql-server
-
----
 
 # Future Improvements
 
